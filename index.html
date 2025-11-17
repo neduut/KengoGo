@@ -11,10 +11,10 @@
   <div class="app">
     <!-- Viršutinė juosta: logotipas, pranešimų mygtukas, profilio mygtukas -->
     <header class="topbar">
-      <div class="logo">KengoGo</div>
+      <button class="logo" id="logoBtn">KengoGo</button>
       <div class="top-actions">
         <button class="icon-btn" id="notifBtn" aria-label="Pranešimai">🔔<span class="badge" id="notifBadge">2</span></button>
-        <button class="icon-btn" id="profileBtn" aria-label="Profilis">👤</button>
+        <button class="icon-btn" id="profileBtn" aria-label="Profilis"><img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Profilis" class="profile-icon" /></button>
       </div>
     </header>
 
@@ -27,13 +27,12 @@
           <h3>Mano vaikai</h3>
           <div class="child-list">
             <button class="child" data-child="1">
-              <!-- Naudojame stabilų placeholder ir įvedame fallback, jei užkrovimas nepavyksta -->
-              <img src="https://picsum.photos/seed/jonukas/64/64" alt="Jonukas" onerror="this.onerror=null;this.src='https://placehold.co/64x64/6b21a8/ffffff?text=J'" />
+              <img src="https://cdn-icons-png.flaticon.com/512/1154/1154453.png" alt="Jonukas" />
               <div class="meta"><strong>Jonukas</strong><small>7 metai</small></div>
             </button>
             <button class="child" data-child="2">
-              <img src="https://placebear.com/64/64" alt="Vardas" />
-              <div class="meta"><strong>Ula</strong><small>5 metai</small></div>
+              <img src="https://cdn-icons-png.flaticon.com/512/706/706830.png" alt="Ula" />
+              <div class="meta"><strong>Ula</strong><small>9 metai</small></div>
             </button>
             <button class="child add-child">+ Pridėti vaiką</button>
           </div>
@@ -51,10 +50,10 @@
           <strong>Aktyvi kelionė</strong>
           <div class="trip-card">
             <div class="trip-info">
-              <div class="child-photo"><img src="https://picsum.photos/seed/jonukas/48/48" alt="Jonukas" onerror="this.onerror=null;this.src='https://placehold.co/48x48/6b21a8/ffffff?text=J'"/></div>
+              <div class="child-photo"><img src="https://cdn-icons-png.flaticon.com/512/1154/1154453.png" alt="Jonukas" /></div>
               <div>
-                <div>Jonukas • Mokykla</div>
-                <div class="muted">Vairuotojas pakeliui • ETA 8 min</div>
+                <div><span class="bold-text">Jonukas</span> • Mokykla</div>
+                <div class="muted"><span class="bold-text">Vairuotojas pakeliui</span> • ETA 8 min</div>
               </div>
             </div>
             <button class="call-driver">Skambinti vairuotojui</button>
@@ -66,12 +65,12 @@
       <section class="screen hidden" id="chooseChild">
         <h2>Pasirinkite vaiką</h2>
         <ul class="child-list-vertical">
-          <li class="child-item" data-child="1"><img src="https://picsum.photos/seed/jonukas/56/56" alt="Jonukas" onerror="this.onerror=null;this.src='https://placehold.co/56x56/6b21a8/ffffff?text=J'"/> <div><strong>Jonukas</strong><small>7 metai</small></div></li>
-          <li class="child-item" data-child="2"><img src="https://placebear.com/56/56"/> <div><strong>Ula</strong><small>5 metai</small></div></li>
+          <li class="child-item" data-child="1"><img src="https://cdn-icons-png.flaticon.com/512/1154/1154453.png" alt="Jonukas" /> <div><strong>Jonukas</strong> <small>7 metai</small></div></li>
+          <li class="child-item" data-child="2"><img src="https://cdn-icons-png.flaticon.com/512/706/706830.png" alt="Ula" /> <div><strong>Ula</strong> <small>9 metai</small></div></li>
         </ul>
         <div class="controls">
           <button class="primary" id="toAddress">Tęsti</button>
-          <button class="secondary" id="manageBtn">Valdyti profilį</button>
+          <button class="secondary" id="backFromChildSelect">Atgal</button>
         </div>
       </section>
 
@@ -80,10 +79,10 @@
         <h2>Adresai / Vietos</h2>
         <form id="addressForm">
           <label>Paėmimo vieta
-            <input type="text" name="pickup" required placeholder="Įveskite adresą arba pasirinkite žemėlapyje" />
+            <input type="text" name="pickup" placeholder="Įveskite adresą arba pasirinkite žemėlapyje" value="Namai" />
           </label>
           <label>Atvežimo vieta
-            <input type="text" name="dropoff" required placeholder="Įveskite adresą" />
+            <input type="text" name="dropoff" placeholder="Įveskite adresą" value="Mokykla" />
           </label>
           <div class="favourites">
             <strong>Dažnai naudojami adresai</strong>
@@ -99,14 +98,18 @@
       <!-- 4. Laiko pasirinkimas: datos/ laiko nustatymai -->
       <section class="screen hidden" id="time">
         <h2>Laiko pasirinkimas</h2>
-        <div class="time-options">
-          <button class="chip">Šiandien</button>
-          <button class="chip">Rytoj</button>
-          <button class="chip">Pasirinkti datą</button>
+        <div class="date-section">
+          <label>Data</label>
+          <div class="time-options">
+            <button class="chip" id="todayBtn">Šiandien</button>
+            <button class="chip" id="tomorrowBtn">Rytoj</button>
+          </div>
+          <input type="date" id="tripDate" />
         </div>
-        <label>Laikas
+        <div class="time-section">
+          <label>Laikas</label>
           <input type="time" id="tripTime" value="08:00" />
-        </label>
+        </div>
         <div class="controls">
           <button class="primary" id="toSummary">Tęsti</button>
           <button class="secondary" id="backFromTime">Atgal</button>
@@ -161,6 +164,7 @@
     $('#orderBtn').addEventListener('click', () => open('chooseChild'));
     document.querySelectorAll('.child').forEach(btn => btn.addEventListener('click', () => { open('chooseChild') }));
     $('#toAddress').addEventListener('click', () => open('address'));
+    $('#backFromChildSelect').addEventListener('click', () => open('homeScreen'));
     $('#backFromAddress').addEventListener('click', () => open('homeScreen'));
     $('#toSummary').addEventListener('click', () => open('summary'));
     $('#backFromTime').addEventListener('click', () => open('address'));
@@ -169,7 +173,18 @@
     $('#notifBtn').addEventListener('click', () => { $('#notifications').classList.toggle('hidden') });
     $('#closeNotif').addEventListener('click', () => { $('#notifications').classList.add('hidden') });
     $('#profileBtn').addEventListener('click', () => alert('Profilis (mock)'));
+    $('#logoBtn').addEventListener('click', () => open('homeScreen'));
     document.getElementById('addressForm').addEventListener('submit', (e) => { e.preventDefault(); open('time'); });
+    
+    // Datos pasirinkimo funkcionalumas
+    const dateInput = $('#tripDate');
+    const today = new Date().toISOString().split('T')[0];
+    const tomorrow = new Date(Date.now() + 86400000).toISOString().split('T')[0];
+    dateInput.value = today;
+    
+    $('#todayBtn').addEventListener('click', () => { dateInput.value = today; });
+    $('#tomorrowBtn').addEventListener('click', () => { dateInput.value = tomorrow; });
+    $('#customDateBtn').addEventListener('click', () => { dateInput.focus(); });
   </script>
 </body>
 </html>
