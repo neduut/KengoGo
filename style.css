@@ -24,8 +24,8 @@ body{font-family:Inter,Segoe UI,Arial,sans-serif;background:var(--bg);margin:0;c
 .profile-icon{width:30px;height:30px;display:block}
 
 /* Ekranų konteineris: talpina visus prototipo žingsnius ir leidžia juos slėpti/rodyti */
-.screens{padding:20px;min-height:calc(100vh - 70px)}
-.screen{display:block;min-height:400px}
+.screens{padding:20px;min-height:calc(75vh - 70px)}
+.screen{display:block;min-height:100px;}
 .hidden{display:none}
 
 .quick-select h3{margin:0 0 8px 0}
@@ -52,7 +52,7 @@ body{font-family:Inter,Segoe UI,Arial,sans-serif;background:var(--bg);margin:0;c
 
 .active-trip{margin-top:12px}
 /* Aktyvi kelionė: rodo esamą užsakymą su ETA ir greitos prieigos mygtuku */
-.trip-card{display:flex;justify-content:space-between;align-items:center;background:#fff;padding:12px;border-radius:10px;border:1px solid #eee}
+.trip-card{display:flex;justify-content:space-between;align-items:center;background:#fcf3da;padding:12px;border-radius:10px;border:1px solid #eee}
 .trip-info{display:flex;gap:12px;align-items:center}
 .trip-info img{width:40px;height:40px;border-radius:50%;object-fit:cover}
 .bold-text{font-weight:700}
@@ -153,7 +153,7 @@ textarea::placeholder{color:var(--muted)}
 .date-section label, .time-section label{display:block;margin-bottom:10px;font-weight:500}
 .date-section input, .time-section input{margin-top:10px}
 
-/* Tablet: 601px–1024px */
+/* plancete 601px–1024px */
 @media (min-width:601px) and (max-width:1024px){
   .app{margin:12px auto}
   .screens{padding:16px}
@@ -164,6 +164,7 @@ textarea::placeholder{color:var(--muted)}
   .notifications{right:16px;bottom:16px;width:360px}
 }
 
+/* telefas iki 600px */
 @media (max-width:600px){
   .app{margin:0;border-radius:0}
   .action-grid{grid-template-columns:1fr}
