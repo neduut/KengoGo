@@ -1,21 +1,21 @@
 :root{
-  --violet: #6b21a8; /* purple */
-  --violet-dark: #4b0f83;
+  --purple: #6b21a8; 
+  --purple-dark: #4b0f83;
   --yellow: #ffd43b;
-  --white: #ffffff;
+  --purple-light: #eadef8;
   --muted: #6b7280;
   --bg: #f7f5ff;
 }
 *{box-sizing:border-box}
 body{font-family:Inter,Segoe UI,Arial,sans-serif;background:var(--bg);margin:0;color:#111}
-.app{max-width:920px;margin:24px auto;background:var(--white);border-radius:12px;overflow:hidden;box-shadow:0 6px 22px rgba(20,10,40,0.08)}
+.app{max-width:920px;margin:24px auto;background:var(--purple-light);border-radius:12px;overflow:hidden;box-shadow:0 6px 22px rgba(20,10,40,0.08)}
 
-.topbar{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;background:linear-gradient(90deg,var(--violet),var(--violet-dark));color:var(--white)}
-/* Top bar: logotipas ir veiksmai; pateikti kontrastinga spalva, kad būtų akcentas */
-.topbar{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;background:linear-gradient(90deg,var(--violet),var(--violet-dark));color:var(--white)}
+.topbar{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;background:linear-gradient(90deg,var(--purple),var(--purple-dark));color:var(--purple-light)}
+/* Viršutinė juosta: logotipas ir veiksmai; pateikti kontrastinga spalva, kad būtų akcentas */
+.topbar{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;background:linear-gradient(90deg,var(--purple),var(--purple-dark));color:var(--purple-light)}
 .logo{font-weight:700;font-size:18px}
 .top-actions{display:flex;gap:8px}
-.icon-btn{background:transparent;border:0;color:var(--white);font-size:18px;padding:8px;border-radius:8px;cursor:pointer}
+.icon-btn{background:transparent;border:0;color:var(--purple-light);font-size:18px;padding:8px;border-radius:8px;cursor:pointer}
 .icon-btn .badge{background:var(--yellow);color:#111;border-radius:999px;padding:2px 6px;margin-left:6px;font-size:12px}
 
 /* Ekranų konteineris: talpina visus prototipo žingsnius ir leidžia juos slėpti/rodyti */
@@ -29,17 +29,17 @@ body{font-family:Inter,Segoe UI,Arial,sans-serif;background:var(--bg);margin:0;c
 .child{display:flex;align-items:center;gap:10px;padding:10px;border-radius:10px;border:1px solid #eee;background:#fff;cursor:pointer}
 .child img{width:64px;height:64px;border-radius:50%;object-fit:cover}
 .child .meta{display:flex;flex-direction:column;align-items:flex-start}
-.child.add-child{background:linear-gradient(90deg,var(--violet),#9b5fe2);color:var(--white);border:0;padding:12px 16px}
+.child.add-child{background:linear-gradient(90deg,var(--purple),#9b5fe2);color:var(--purple-light);border:0;padding:12px 16px}
 
 .action-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
 /* Veiksmų grid: pagrindiniai mygtukai; pirminis veiksmas paryškintas */
-.primary{background:var(--violet);color:var(--white);border:0;padding:12px;border-radius:10px;font-weight:600;cursor:pointer}
+.primary{background:var(--purple);color:var(--purple-light);border:0;padding:12px;border-radius:10px;font-weight:600;cursor:pointer}
 .secondary{background:#fff;border:1px solid #eee;color:#333;padding:12px;border-radius:10px;cursor:pointer}
 .danger{background:#ff4d4f;color:#fff;border:0;padding:12px;border-radius:10px}
 
 .active-trip{margin-top:12px}
 /* Aktyvi kelionė: rodo esamą užsakymą su ETA ir greitos prieigos mygtuku */
-.trip-card{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(90deg,var(--white),#fafafc);padding:12px;border-radius:10px;border:1px solid #eee}
+.trip-card{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(90deg,var(--purple-light),#fafafc);padding:12px;border-radius:10px;border:1px solid #eee}
 .trip-info{display:flex;gap:12px;align-items:center}
 .muted{color:var(--muted);font-size:13px}
 .call-driver{background:var(--yellow);border:0;padding:8px 10px;border-radius:10px;cursor:pointer}
@@ -69,7 +69,7 @@ input[type=text], input[type=time]{display:block;width:100%;padding:10px;border-
 .car{position:absolute;left:60%;top:45%;font-size:26px}
 
 /* notifications */
-.notifications{position:fixed;right:20px;bottom:24px;width:280px;background:var(--white);border-radius:10px;padding:12px;box-shadow:0 10px 30px rgba(10,10,20,0.12)}
+.notifications{position:fixed;right:20px;bottom:24px;width:280px;background:var(--purple-light);border-radius:10px;padding:12px;box-shadow:0 10px 30px rgba(10,10,20,0.12)}
 
 /* utilities */
 .chip{padding:8px 12px;border-radius:20px;background:#fff;border:1px solid #eee}

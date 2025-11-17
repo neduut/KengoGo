@@ -9,7 +9,6 @@
 <body>
   <!-- Pagrindinis aplikacijos konteineris -->
   <div class="app">
-    <!-- Topbar -->
     <!-- Viršutinė juosta: logotipas, pranešimų mygtukas, profilio mygtukas -->
     <header class="topbar">
       <div class="logo">KengoGo</div>
@@ -19,10 +18,8 @@
       </div>
     </header>
 
-    <!-- Screens container -->
     <!-- Pagrindinis ekranų konteineris: čia rodomi skirtingi prototipo žingsniai -->
     <main class="screens">
-      <!-- Home / Main Menu - 1 pav -->
       <!-- 1. Namų ekranas: greitas vaikų pasirinkimas ir pagrindiniai mygtukai -->
       <section class="screen" id="homeScreen">
         <!-- 'Mano vaikai' skiltis: leidžia greitai pasirinkti vaiką užsakymui -->
@@ -65,7 +62,6 @@
         </div>
       </section>
 
-      <!-- Child selection - 2 pav -->
       <!-- 2. Vaiko pasirinkimas: sąrašas su vaiko informacija ir eigos tęsinys -->
       <section class="screen hidden" id="chooseChild">
         <h2>Pasirinkite vaiką</h2>
@@ -79,7 +75,6 @@
         </div>
       </section>
 
-      <!-- Address screen - 3 pav -->
       <!-- 3. Adresų / vietos nurodymas: paėmimo ir atvežimo laukai -->
       <section class="screen hidden" id="address">
         <h2>Adresai / Vietos</h2>
@@ -101,7 +96,6 @@
         </form>
       </section>
 
-      <!-- Time selection - 4 pav -->
       <!-- 4. Laiko pasirinkimas: datos/ laiko nustatymai -->
       <section class="screen hidden" id="time">
         <h2>Laiko pasirinkimas</h2>
@@ -119,7 +113,6 @@
         </div>
       </section>
 
-      <!-- Summary and confirm - 5 pav -->
       <!-- 5. Užsakymo peržiūra ir patvirtinimas -->
       <section class="screen hidden" id="summary">
         <h2>Užsakymo peržiūra</h2>
@@ -136,7 +129,6 @@
         </div>
       </section>
 
-      <!-- Active trip / Map screen - 6 pav -->
       <!-- 6. Aktyvios kelionės ekranas (stebėjimas) -->
       <section class="screen hidden" id="activeTrip">
         <h2>Aktyvi kelionė</h2>
@@ -150,7 +142,6 @@
         </div>
       </section>
 
-      <!-- Notifications area - 8 pav -->
       <!-- 8. Pranešimų / įspėjimų sritis: rodomi įvykiai ir pranešimai -->
       <aside class="notifications hidden" id="notifications">
         <h3>Pranešimai</h3>
@@ -164,8 +155,7 @@
   </div>
 
   <script>
-  // Trumpi JS komentarai (liet.): perjungimas tarp ekranų ir pagrindinio interaktyvumo
-  // open(id) — rodo vieną ekraną, slėpia kitus. Šis paprastas mechanizmas imituoja navigaciją.
+  // js navigacija
     const $ = sel => document.querySelector(sel);
   const open = id => { document.querySelectorAll('.screen').forEach(s => s.classList.add('hidden')); document.getElementById(id).classList.remove('hidden'); }
     $('#orderBtn').addEventListener('click', () => open('chooseChild'));
@@ -178,9 +168,7 @@
     $('#confirmBtn').addEventListener('click', () => open('activeTrip'));
     $('#notifBtn').addEventListener('click', () => { $('#notifications').classList.toggle('hidden') });
     $('#closeNotif').addEventListener('click', () => { $('#notifications').classList.add('hidden') });
-    // Profilio mygtukas: demonstracinis veikimas — atidaro paprastą pranešimą.
     $('#profileBtn').addEventListener('click', () => alert('Profilis (mock)'));
-    // Form submit
     document.getElementById('addressForm').addEventListener('submit', (e) => { e.preventDefault(); open('time'); });
   </script>
 </body>
