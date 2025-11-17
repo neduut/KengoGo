@@ -138,24 +138,115 @@
       <!-- 6. Aktyvios kelionės ekranas (stebėjimas) -->
       <section class="screen hidden" id="activeTrip">
         <h2>Aktyvi kelionė</h2>
+        
+        <!-- Žemėlapis su automobilio pozicija -->
         <div class="map-viewport">
           <div class="map-placeholder">Žemėlapis (mock)</div>
-          <div class="car">🚗</div>
+          <div class="route-line"></div>
         </div>
-        <div class="trip-status">
-          <div class="status">Vairuotojas pakeliui • ETA 6 min</div>
-          <button class="primary">Skambinti vairuotojui</button>
+
+        <!-- Kelionės statuso langas -->
+        <div class="trip-status-card">
+          <div class="status-header">
+            <div class="driver-info">
+              <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Vairuotojas" />
+              <div>
+                <div class="bold-text">Jonas Jonaitis</div>
+                <div class="status-text">Vairuotojas pakeliui</div>
+              </div>
+            </div>
+            <div class="eta">
+              <div class="eta-time">6 min</div>
+              <div class="eta-label">ETA</div>
+            </div>
+          </div>
+          
+          <div class="trip-details">
+            <div class="detail-row">
+              <span>Vaikas:</span>
+              <span class="bold-text">Jonukas</span>
+            </div>
+            <div class="detail-row">
+              <span>Paėmimas:</span>
+              <span>Namai</span>
+            </div>
+            <div class="detail-row">
+              <span>Atvežimas:</span>
+              <span>Mokykla</span>
+            </div>
+            <div class="detail-row">
+              <span>Automobilis:</span>
+              <span>Toyota RAV4 • ABC123</span>
+            </div>
+          </div>
+
+          <div class="progress-tracker">
+            <div class="progress-step active">
+              <div class="step-dot"></div>
+              <div class="step-label">Vairuotojas pakeliui</div>
+            </div>
+            <div class="progress-step">
+              <div class="step-dot"></div>
+              <div class="step-label">Paėmė vaiką</div>
+            </div>
+            <div class="progress-step">
+              <div class="step-dot"></div>
+              <div class="step-label">Vežimas į mokyklą</div>
+            </div>
+            <div class="progress-step">
+              <div class="step-dot"></div>
+              <div class="step-label">Atvežta</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Veiksmai -->
+        <div class="trip-actions">
+          <button class="secondary action-btn">
+            <span class="btn-icon">📞</span>
+            Skambinti vairuotojui
+          </button>
+          <button class="secondary action-btn">
+            <span class="btn-icon">💬</span>
+            Žinutė
+          </button>
+          <button class="danger sos-btn">
+            <span class="btn-icon">🚨</span>
+            SOS
+          </button>
         </div>
       </section>
 
       <!-- 8. Pranešimų / įspėjimų sritis: rodomi įvykiai ir pranešimai -->
       <aside class="notifications hidden" id="notifications">
-        <h3>Pranešimai</h3>
-        <ul>
-          <li><strong>Vėluoja vairuotojas</strong> • 5 min</li>
-          <li><strong>Vaikas patvirtino</strong> • Praėjus 10 min</li>
-        </ul>
-        <button class="secondary" id="closeNotif">Uždaryti</button>
+        <div class="notif-header">
+          <h3>Pranešimai</h3>
+          <button class="icon-btn" id="closeNotif">✕</button>
+        </div>
+        <div class="notif-list">
+          <div class="notif-item warning">
+            <div class="notif-icon">⚠️</div>
+            <div class="notif-content">
+              <div class="notif-title">Vėluoja vairuotojas</div>
+              <div class="notif-time">Prieš 5 min</div>
+            </div>
+          </div>
+          <div class="notif-item success">
+            <div class="notif-icon">✓</div>
+            <div class="notif-content">
+              <div class="notif-title">Vaikas paėmtas</div>
+              <div class="notif-time">Prieš 10 min</div>
+            </div>
+          </div>
+          <div class="notif-item info">
+            <div class="notif-icon">🚗</div>
+            <div class="notif-content">
+              <div class="notif-title">Vairuotojas pradėjo kelionę</div>
+              <div class="notif-time">Prieš 15 min</div>
+            </div>
+          </div>
+        </div>
+        <button class="secondary notif-clear">Išvalyti visus</button>
       </aside>
     </main>
   </div>
@@ -178,6 +269,15 @@
     $('#profileBtn').addEventListener('click', () => alert('Profilis (mock)'));
     $('#logoBtn').addEventListener('click', () => open('homeScreen'));
     document.getElementById('addressForm').addEventListener('submit', (e) => { e.preventDefault(); open('time'); });
+    
+    // SOS mygtukas
+    document.querySelectorAll('.sos-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if(confirm('⚠️ KRITINĖ SITUACIJA!\n\nAr tikrai norite siųsti SOS signalą?\n\nBus informuoti:\n• Vairuotojas\n• Greitosios pagalbos tarnyba\n• Jūsų nurodyti kontaktai')) {
+          alert('🚨 SOS signalas išsiųstas!\n\nPagalba jau kelyje.');
+        }
+      });
+    });
     
     // Datos pasirinkimo funkcionalumas
     const dateInput = $('#tripDate');
