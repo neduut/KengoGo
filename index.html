@@ -41,7 +41,7 @@
         <!-- Pagrindiniai veiksmai: Užsakyti kelionę ir kiti veiksmai -->
         <div class="action-grid">
           <button class="primary" id="orderBtn">Užsakyti kelionę</button>
-          <button class="secondary">Grafikai</button>
+          <button class="secondary">Pasikartojantys maršrutai</button>
           <button class="secondary">Istorija</button>
           <button class="secondary">Pagalba</button>
         </div>
@@ -124,7 +124,10 @@
           <div class="line"><strong>Paėmimo vieta:</strong> Namai</div>
           <div class="line"><strong>Atvežimo vieta:</strong> Mokykla</div>
           <div class="line"><strong>Laikas:</strong> 08:00</div>
-          <div class="line muted">Specialūs poreikiai: Nėra</div>
+        </div>
+        <div class="special-needs-section">
+          <label>Specialūs poreikiai</label>
+          <textarea id="specialNeeds" placeholder="Komentaras" rows="3"></textarea>
         </div>
         <div class="controls">
           <button class="danger" id="confirmBtn">Patvirtinti kelionę</button>
@@ -165,7 +168,7 @@
     document.querySelectorAll('.child').forEach(btn => btn.addEventListener('click', () => { open('chooseChild') }));
     $('#toAddress').addEventListener('click', () => open('address'));
     $('#backFromChildSelect').addEventListener('click', () => open('homeScreen'));
-    $('#backFromAddress').addEventListener('click', () => open('homeScreen'));
+    $('#backFromAddress').addEventListener('click', () => open('chooseChild'));
     $('#toSummary').addEventListener('click', () => open('summary'));
     $('#backFromTime').addEventListener('click', () => open('address'));
     $('#backFromSummary').addEventListener('click', () => open('time'));

@@ -13,9 +13,13 @@ body{font-family:Inter,Segoe UI,Arial,sans-serif;background:var(--bg);margin:0;c
 .topbar{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;background:linear-gradient(90deg,var(--purple),var(--purple-dark));color:var(--purple-light)}
 /* Viršutinė juosta: logotipas ir veiksmai; pateikti kontrastinga spalva, kad būtų akcentas */
 .topbar{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;background:linear-gradient(90deg,var(--purple),var(--purple-dark));color:var(--purple-light)}
-.logo{font-weight:700;font-size:23px;background:transparent;border:0;color:inherit;cursor:pointer;padding:0}
+.logo{font-weight:700;font-size:23px;background:transparent;border:0;color:inherit;cursor:pointer;padding:0;transition:opacity 0.2s}
+.logo:hover{opacity:0.8}
+.logo:active{background:rgba(255,212,59,0.2);border-radius:8px;padding:4px 8px}
 .top-actions{display:flex;gap:8px}
-.icon-btn{background:transparent;border:0;color:var(--purple-light);font-size:18px;padding:8px;border-radius:8px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center}
+.icon-btn{background:transparent;border:0;color:var(--purple-light);font-size:18px;padding:8px;border-radius:8px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:background 0.2s}
+.icon-btn:hover{background:rgba(255,212,59,0.15)}
+.icon-btn:active{background:rgba(255,212,59,0.3)}
 .icon-btn .badge{background:var(--yellow);color:#111;border-radius:999px;padding:2px 6px;margin-left:6px;font-size:12px}
 .profile-icon{width:30px;height:30px;display:block}
 
@@ -27,16 +31,24 @@ body{font-family:Inter,Segoe UI,Arial,sans-serif;background:var(--bg);margin:0;c
 .quick-select h3{margin:0 0 8px 0}
 /* 'Mano vaikai' blokas: greito pasirinkimo vaikai */
 .child-list{display:flex;gap:12px;align-items:stretch}
-.child{display:flex;align-items:center;gap:10px;padding:10px;border-radius:10px;border:1px solid #eee;background:#fff;cursor:pointer;width:220px;min-height:84px}
+.child{display:flex;align-items:center;gap:10px;padding:10px;border-radius:10px;border:1px solid #eee;background:#fff;cursor:pointer;width:220px;min-height:84px;transition:background 0.2s}
+.child:hover{background:#fffbf0}
+.child:active{background:#fff4d6}
 .child img{width:64px;height:64px;border-radius:50%;object-fit:cover;flex-shrink:0}
 .child .meta{display:flex;flex-direction:column;align-items:flex-start}
-.child.add-child{background:linear-gradient(90deg,var(--purple),#9b5fe2);color:var(--purple-light);border:0;padding:12px 16px;width:220px;min-height:84px;justify-content:center}
+.child.add-child{background:linear-gradient(90deg,rgba(107,33,168,0.66),rgba(171,122,231,0.6));color:#fff;border:0;padding:12px 16px;width:220px;min-height:84px;justify-content:center}
 
 .action-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
 /* Veiksmų grid: pagrindiniai mygtukai; pirminis veiksmas paryškintas */
-.primary{background:var(--purple);color:var(--purple-light);border:0;padding:12px;border-radius:10px;font-weight:600;cursor:pointer}
-.secondary{background:#fff;border:1px solid #eee;color:#333;padding:12px;border-radius:10px;cursor:pointer}
-.danger{background:#ff4d4f;color:#fff;border:0;padding:12px;border-radius:10px}
+.primary{background:var(--purple);color:var(--purple-light);border:0;padding:12px;border-radius:10px;font-weight:600;cursor:pointer;transition:background 0.2s}
+.primary:hover{background:#7c2bb8}
+.primary:active{background:#5a1a8f}
+.secondary{background:#fff;border:1px solid #eee;color:#333;padding:12px;border-radius:10px;cursor:pointer;transition:background 0.2s}
+.secondary:hover{background:#fffbf0}
+.secondary:active{background:#fff4d6}
+.danger{background:#ff4d4f;color:#fff;border:0;padding:12px;border-radius:10px;cursor:pointer;transition:background 0.2s}
+.danger:hover{background:#ff6668}
+.danger:active{background:#e03032}
 
 .active-trip{margin-top:12px}
 /* Aktyvi kelionė: rodo esamą užsakymą su ETA ir greitos prieigos mygtuku */
@@ -44,21 +56,31 @@ body{font-family:Inter,Segoe UI,Arial,sans-serif;background:var(--bg);margin:0;c
 .trip-info{display:flex;gap:12px;align-items:center}
 .trip-info img{width:40px;height:40px;border-radius:50%;object-fit:cover}
 .bold-text{font-weight:700}
-.call-driver{background:var(--yellow);border:0;padding:8px 10px;border-radius:10px;cursor:pointer}
+.call-driver{background:var(--yellow);border:0;padding:8px 10px;border-radius:10px;cursor:pointer;transition:background 0.2s}
+.call-driver:hover{background:#ffe066}
+.call-driver:active{background:#ffc700}
 
 /* child selector screen */
 .child-list-vertical{list-style:none;padding:0;margin:12px 0}
 /* Vaikų sąrašas (vertikaliai): peržiūra ir pasirinkimas */
-.child-item{display:flex;gap:12px;align-items:center;padding:12px;border-radius:10px;border:1px solid #eee;background:#fff;cursor:pointer;margin-bottom:8px}
+.child-item{display:flex;gap:12px;align-items:center;padding:12px;border-radius:10px;border:1px solid #eee;background:#fff;cursor:pointer;margin-bottom:8px;transition:background 0.2s}
+.child-item:hover{background:#fffbf0}
+.child-item:active{background:#fff4d6}
 .child-item img{width:56px;height:56px;border-radius:50%;}
 .controls{display:flex;gap:12px;margin-top:12px}
 
 /* forms */
 label{display:block;margin-bottom:16px;font-weight:500}
 input[type=text], input[type=time], input[type=date]{display:block;width:100%;padding:10px;border-radius:8px;border:1px solid #eee;background:#fff;margin-top:6px}
+textarea{display:block;width:100%;padding:10px;border-radius:8px;border:1px solid #eee;background:#fff;font-family:inherit;resize:vertical;margin-top:6px}
+textarea::placeholder{color:var(--muted)}
+.special-needs-section{margin:20px 0 16px 0}
+.special-needs-section label{margin-bottom:8px}
 .favourites{padding:8px 0}
 /* Dažnai naudojami adresai palengvina paėmimo/atvežimo laukų užpildymą */
-.fav-list button{margin-right:8px;padding:8px;border-radius:8px;border:1px dashed #ddd;background:#fff}
+.fav-list button{margin-right:8px;padding:8px;border-radius:8px;border:1px dashed #ddd;background:#fff;cursor:pointer;transition:background 0.2s}
+.fav-list button:hover{background:#fffbf0}
+.fav-list button:active{background:#fff4d6}
 
 /* summary */
 .summary-card{background:#fff;border:1px solid #f0eef8;padding:12px;border-radius:10px}
@@ -74,7 +96,9 @@ input[type=text], input[type=time], input[type=date]{display:block;width:100%;pa
 .notifications{position:fixed;right:20px;bottom:24px;width:280px;background:var(--purple-light);border-radius:10px;padding:12px;box-shadow:0 10px 30px rgba(10,10,20,0.12)}
 
 /* utilities */
-.chip{padding:8px 12px;border-radius:20px;background:#fff;border:1px solid #eee;cursor:pointer}
+.chip{padding:8px 12px;border-radius:20px;background:#fff;border:1px solid #eee;cursor:pointer;transition:background 0.2s}
+.chip:hover{background:#fffbf0}
+.chip:active{background:#fff4d6}
 .time-options{display:flex;gap:8px;margin:10px 0}
 .date-section{margin-bottom:24px}
 .date-section label, .time-section label{display:block;margin-bottom:10px;font-weight:500}
