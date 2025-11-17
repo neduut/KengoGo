@@ -153,6 +153,17 @@ textarea::placeholder{color:var(--muted)}
 .date-section label, .time-section label{display:block;margin-bottom:10px;font-weight:500}
 .date-section input, .time-section input{margin-top:10px}
 
+/* Tablet: 601px–1024px */
+@media (min-width:601px) and (max-width:1024px){
+  .app{margin:12px auto}
+  .screens{padding:16px}
+  .child-list{flex-wrap:wrap}
+  .child{width:calc(50% - 6px)}
+  .action-grid{grid-template-columns:1fr 1fr}
+  .map-viewport{height:300px}
+  .notifications{right:16px;bottom:16px;width:360px}
+}
+
 @media (max-width:600px){
   .app{margin:0;border-radius:0}
   .action-grid{grid-template-columns:1fr}
