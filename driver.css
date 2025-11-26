@@ -1,0 +1,741 @@
+/* Vairuotojo modulio stiliai (naudoja kintamuosius iš KengoGo/style.css) */
+.driver-topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:14px 20px;
+  background:linear-gradient(90deg,#f3cc52,#d9a020); /* grąžinta į auksinį toną */
+  color:#fff;
+  position:relative;
+  box-shadow:0 8px 18px rgba(0,0,0,0.12);
+}
+.driver-brand{font-weight:800;font-size:22px;letter-spacing:-0.2px}
+.driver-brand{display:flex;align-items:center;gap:10px}
+.driver-logo-wrap{
+  width:auto;
+  height:auto;
+  border-radius:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:transparent;
+  padding:0;
+  border:0;
+}
+.driver-logo{
+  height:64px;
+  width:auto;
+  display:block;
+  object-fit:contain;
+  object-position:center center;
+  filter:
+    drop-shadow(0 2px 6px rgba(0,0,0,0.18))
+    drop-shadow(0 0 8px rgba(255,255,255,0.20)); /* švelnus kontūras, kad logo aiškiai matytųsi */
+}
+.driver-brand-text{display:inline-block;line-height:1}
+.driver-brand-text{
+  font-size:26px;
+  font-weight:900;
+  letter-spacing:-0.4px;
+  color:#fff;
+  text-shadow:0 2px 6px rgba(0,0,0,0.18);
+}
+.driver-actions{display:flex;align-items:center;gap:12px}
+.driver-icon-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  background:transparent;
+  border:0;
+  color:#ffe27a;
+  font-size:24px;
+  cursor:pointer;
+  padding:6px 8px;
+  border-radius:10px;
+}
+.driver-icon-btn:hover{background:rgba(255,255,255,0.08)}
+.driver-badge{
+  background:#f5c400;
+  color:#2c1b00;
+  border-radius:999px;
+  padding:3px 7px;
+  font-weight:800;
+  font-size:12px;
+  box-shadow:0 2px 6px rgba(0,0,0,0.16);
+}
+.driver-avatar{
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  object-fit:cover;
+  border:2px solid rgba(255,255,255,0.7);
+  background:#fff1bf;
+  box-shadow:0 4px 12px rgba(0,0,0,0.12);
+}
+.driver-avatar-btn{
+  background:transparent;
+  border:0;
+  padding:0;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+}
+.driver-profile{
+  position:absolute;
+  right:16px;
+  top:64px;
+  background:#fffbe6;
+  border:1px solid rgba(0,0,0,0.06);
+  border-radius:12px;
+  box-shadow:0 12px 32px rgba(0,0,0,0.16);
+  padding:12px;
+  width:240px;
+  z-index:1500;
+}
+.driver-profile.hidden{display:none}
+.driver-profile-header{display:flex;gap:10px;align-items:center;margin-bottom:8px}
+.driver-name{font-weight:800;font-size:16px}
+.driver-meta{color:#6b7280;font-size:13px}
+.driver-profile-row{font-size:14px;margin:4px 0;color:#2c1b00;}
+
+.driver-notifs{
+  position:absolute;
+  right:16px;
+  top:64px;
+  background:#fff;
+  border:1px solid rgba(0,0,0,0.06);
+  border-radius:12px;
+  box-shadow:0 12px 32px rgba(0,0,0,0.16);
+  width:240px;
+  z-index:1500;
+  padding:8px;
+}
+.driver-notifs.hidden{display:none}
+.driver-notif-item{display:flex;gap:10px;align-items:center;padding:8px;border-radius:10px;cursor:pointer;}
+.driver-notif-item:hover{background:#fff7d6}
+.driver-notif-icon{font-size:18px}
+.driver-notif-title{font-weight:700;font-size:14px}
+.driver-notif-time{font-size:12px;color:#6b7280}
+.order-list{display:flex;flex-direction:column;gap:12px}
+.order-card {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  background: #fff;
+  border-radius: 14px;
+  padding: 14px;
+  border: 1px solid rgba(0,0,0,0.06);
+  cursor: pointer;
+  position: relative;
+  overflow: visible;
+}
+.order-card:hover{background:#f6fff6}
+.progress-tracker.driver{margin-top:12px}
+.qr-mock{display:flex;align-items:center;justify-content:center;background:#fff;padding:12px;border-radius:8px;border:1px dashed #ddd;width:200px;height:200px}
+.small{font-size:13px;color:var(--muted)}
+.controls {gap:8px}
+
+/* Map viewport (align size with passenger app) */
+.map-viewport{
+  position:relative;
+  height:320px;
+  min-height:280px;
+  border-radius:12px;
+  border:1px solid #eee;
+  margin-bottom:16px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  background:#eef1ff;
+  background-image:url('img/map.png');
+  background-size:cover;
+  background-position:center 12%;
+  background-repeat:no-repeat;
+}
+.map-viewport::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg,rgba(255,255,255,0) 0%, rgba(255,255,255,0.08) 100%);
+  pointer-events:none;
+}
+
+/* Trip steps toolbar (floating, accessible) */
+/* allow wrapping on larger screens, horizontal scroll on small screens */
+.trip-steps{
+  display:flex;
+  gap:8px;
+  padding:10px;
+  background:rgba(255,255,255,0.98);
+  border-radius:12px;
+  box-shadow:0 8px 28px rgba(0,0,0,0.08);
+  overflow:visible;
+  align-items:center;
+  justify-content:center;
+  position:fixed;
+  left:12px;
+  right:12px;
+  bottom:12px;
+  z-index:999;
+  flex-wrap:wrap;
+}
+.trip-steps.hidden{display:none}
+
+/* make action buttons big & easy to hit while driving */
+.big-action{padding:14px 18px;font-size:18px;border-radius:12px;min-width:220px;line-height:1.1;box-shadow:0 10px 28px rgba(0,0,0,0.08);font-weight:800}
+.big-action.primary{background:var(--purple);color:#fff;border:0}
+.big-action.secondary{background:#fff;border:2px solid rgba(0,0,0,0.06)}
+.big-action.danger{background:linear-gradient(180deg,#ff5f6d,#e03032);color:#fff;border:0}
+
+@media (max-width:640px){
+  .trip-steps{left:8px;right:8px;bottom:8px;padding:8px;gap:6px}
+  .big-action{min-width:140px;padding:10px 12px;font-size:16px}
+}
+
+/* Reduce visual clutter when toolbar is visible -> add safe bottom padding to content */
+body.toolbar-visible main{ padding-bottom: 190px; }
+
+/* stage buttons — bigger & clearer */
+.stage-btn{background:transparent;border:1px solid rgba(0,0,0,0.06);padding:12px 16px;border-radius:10px;cursor:pointer;white-space:nowrap;font-size:16px;min-width:96px;text-align:center;font-weight:700}
+.stage-btn:disabled{opacity:0.4;cursor:not-allowed}
+.stage-btn.active{background:var(--purple);color:#fff;border-color:var(--purple-dark);box-shadow:0 6px 18px rgba(124,43,184,0.2)}
+.stage-btn:focus{outline:3px solid rgba(0,0,0,0.08);outline-offset:2px}
+
+/* traffic toggle - yellow */
+.traffic-btn{background:linear-gradient(180deg,#ffecb8,#ffd86a);color:#222;border:2px solid #ffcc33;padding:12px 16px;border-radius:12px;font-weight:800;font-size:16px;min-width:120px}
+.traffic-btn.active{background:linear-gradient(180deg,#ffbb33,#ff8c00);color:#fff;border-color:#ff8c00;box-shadow:0 10px 28px rgba(255,140,0,0.18)}
+.traffic-btn{
+  position: relative;
+  z-index: 1301; /* aukštesnis nei bottom panel (1200) */
+}
+
+/* SOS button - prominent red */
+.sos-btn{background:linear-gradient(180deg,#ff5f6d,#e03032);color:#fff;border:0;padding:12px 18px;border-radius:16px;font-weight:900;font-size:18px;min-width:90px;box-shadow:0 12px 34px rgba(224,48,50,0.26)}
+.sos-btn:active{transform:translateY(1px);}
+
+/* Toast */
+.driver-toast{position:fixed;bottom:84px;left:50%;transform:translateX(-50%);background:#111;color:#fff;padding:10px 16px;border-radius:10px;box-shadow:0 8px 26px rgba(0,0,0,0.25);z-index:1000;font-weight:700}
+.driver-toast.hidden{display:none}
+
+/* SOS overlay */
+.sos-overlay{position:fixed;inset:0;background:linear-gradient(180deg,rgba(240,48,50,0.1),rgba(0,0,0,0.3));display:flex;align-items:center;justify-content:center;z-index:1100}
+.sos-overlay.hidden{display:none}
+.sos-card{background:#fff;padding:20px;border-radius:12px;box-shadow:0 12px 30px rgba(0,0,0,0.3);width:320px;max-width:90%}
+.sos-card h2{margin:0 0 8px 0;color:#e03032}
+.sos-card p{margin:0 0 16px 0;color:#333;font-size:14px}
+
+/* compact stage toggle & vertical panel */
+.stage-toggle{background:var(--purple);color:#fff;border:0;padding:10px 12px;border-radius:12px;font-weight:800;min-width:88px;cursor:pointer;box-shadow:0 8px 20px rgba(124,43,184,0.12)}
+.stage-toggle:disabled{opacity:0.45;cursor:not-allowed}
+
+/* panel positioned above toolbar, vertical stack */
+.driver-topbar .stage-panel{
+  position:absolute;
+  top:calc(100% + 10px);
+  right:12px;
+  left:auto;
+  transform:none;
+  bottom:auto;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  padding:8px;
+  background:rgba(255,255,255,0.97);
+  border-radius:10px;
+  box-shadow:0 12px 32px rgba(0,0,0,0.12);
+  z-index:1200;
+  min-width:200px;
+  max-width:min(420px,95%);
+}
+
+/* when panel is not used in header, keep previous rule; keep default bottom for trip-steps anchored panel */
+.stage-panel{ /* fallback - bottom anchored usage - unchanged */
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  bottom:calc(100% + 12px);
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  padding:10px;
+  background:rgba(255,255,255,0.98);
+  border-radius:12px;
+  box-shadow:0 12px 32px rgba(0,0,0,0.12);
+  z-index:1000;
+  min-width:200px;
+  max-width:min(420px,95%);
+}
+.stage-panel.hidden{display:none}
+.stage-panel.expanded{display:flex}
+
+/* stage buttons inside panel larger for touch - full width */
+.stage-panel .stage-btn{width:100%;min-width:0;text-align:left;padding:12px 14px;font-size:18px;border-radius:10px}
+.stage-panel .stage-btn.active{font-weight:900}
+
+/* Bottom vertical stage panel (appears after Atvykau į paėmimo vietą) */
+.bottom-stage-panel{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  flex-wrap:wrap;
+  align-items:center;
+  padding:10px;
+  width:min(420px,94%);
+  position:fixed;
+  left:50%;
+  transform:translateX(-50%);
+  bottom:14px;
+  z-index:1300;
+  background:rgba(255,255,255,0.98);
+  border-radius:12px;
+  box-shadow:0 12px 32px rgba(0,0,0,0.12);
+}
+.bottom-stage-panel.hidden{display:none}
+.bottom-stage-panel .stage-btn{min-width:100%;padding:12px 14px;border-radius:10px;font-size:16px;text-align:left}
+.bottom-stage-panel .stage-btn.active{font-weight:900}
+.bottom-stage-panel .traffic-btn, .bottom-stage-panel .sos-btn{
+  width:100%;
+  min-width:0;
+  flex: 1;
+  margin:0;
+}
+
+/* make the two action buttons in a row on larger screens, stacked on mobile */
+.bottom-stage-panel > div{display:flex;gap:8px}
+@media (max-width:640px){
+  .bottom-stage-panel > div{flex-direction:column}
+}
+
+/* avoid overlap: when bottom panel visible, raise trip steps */
+body.bottom-panel-visible .trip-steps{
+  bottom: calc(14px + 260px); /* push toolbar up so it doesn't overlap */
+}
+
+/* ensure trip steps doesn't cover bottom panel when visible on mobile */
+@media (max-width:640px){
+  body.bottom-panel-visible .trip-steps{
+    bottom: calc(8px + 220px);
+  }
+}
+
+/* remove duplicate .traffic-btn z-index since it's inside panel now */
+.traffic-btn{position:static;z-index:auto}
+
+/* stage buttons smaller and subtler */
+.bottom-stage-panel .stage-btn,
+.stage-panel .stage-btn {
+  padding:6px 10px;
+  font-size:13px;
+  height:34px;
+  min-width:0;
+  border-radius:8px;
+  background: rgba(0,0,0,0.04);
+  color: #111;
+  border:1px solid rgba(0,0,0,0.06);
+  font-weight:600;
+  white-space:nowrap;
+  flex:0 0 auto;
+}
+
+.bottom-stage-panel .stage-btn.active,
+.stage-panel .stage-btn.active{
+  background: rgba(0,112,243,0.08);
+  color: #064a9e;
+  border-color: rgba(0,112,243,0.12);
+  box-shadow:none;
+}
+
+/* bottom action buttons layout: side-by-side on wide screens, stacked on small */
+.bottom-stage-panel .bottom-actions{display:flex;gap:8px;margin-top:6px;width:100%}
+.bottom-stage-panel .bottom-actions button{flex:1}
+
+/* define subdued look for traffic/sos on bottom */
+.bottom-stage-panel .traffic-btn,
+.bottom-stage-panel .sos-btn{
+  padding:10px;
+  font-size:15px;
+  border-radius:10px;
+}
+
+/* ensure bottom panel doesn't cause overlapping */
+body.bottom-panel-visible .trip-steps {
+  bottom: calc(14px + 220px); /* adjust if you increase bottom-panel height */
+}
+
+/* mobile: stack the actions vertically */
+@media (max-width:640px){
+  .bottom-stage-panel{left:8px;right:8px;transform:none;bottom:8px;padding:8px}
+  .bottom-stage-panel .bottom-actions{flex-direction:column}
+  .bottom-stage-panel .stage-btn{font-size:12px;padding:6px 8px;height:32px}
+}
+
+/* Card / summary styling (minimal like customer UI) */
+.order-card .card-meta { flex: 1; min-width:0; }
+.order-card .card-meta .title { display:flex;justify-content:space-between;align-items:center;gap:8px }
+.order-card .title h3{ margin:0;font-size:16px;font-weight:800 }
+.order-card .eta { color:var(--purple); font-weight:900; font-size:18px; }
+
+/* summary card similar to screenshot - gentle purple background */
+.summary-card {
+  background: rgba(243, 235, 255, 0.7); /* very light purple */
+  padding: 12px;
+  border-radius: 10px;
+  margin-top: 10px;
+  font-size: 14px;
+  color: #111;
+}
+
+/* progress tracker vertical */
+.progress-tracker.driver {
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  padding-left:10px;
+  min-width:160px;
+  align-items:flex-start;
+}
+.progress-tracker.driver .step {
+  display:flex;
+  gap:8px;
+  align-items:center;
+  color:var(--muted);
+  font-weight:600;
+  font-size:13px;
+}
+.progress-tracker.driver .dot {
+  width:12px;height:12px;border-radius:999px;background:rgba(0,0,0,0.06);border:2px solid rgba(0,0,0,0.06);
+}
+.progress-tracker.driver .step.active .dot {
+  background:var(--purple);
+  border-color:var(--purple-dark);
+  box-shadow:0 6px 14px rgba(124,43,184,0.12);
+  color:#fff;
+}
+
+/* --- Override stage button layout: centered label, no contour, left dot --- */
+.bottom-stage-panel .stage-btn,
+.stage-panel .stage-btn {
+  display:flex !important;
+  align-items:center;
+  justify-content:center !important; /* center label */
+  width:100%;
+  padding:10px 16px;
+  gap:8px;
+  border:none !important;        /* remove contour */
+  background: rgba(255,255,255,0.98) !important;
+  color: #7a7a7a !important;          /* subtle gray text */
+  font-weight:600;
+  position:relative;
+  text-align:center;
+  box-shadow:none !important;
+}
+
+/* left small dot indicator */
+.bottom-stage-panel .stage-btn .dot,
+.stage-panel .stage-btn .dot {
+  position:absolute;
+  left:14px;
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background: rgba(0,0,0,0.08);
+}
+
+/* label centered and gray, but darker when active */
+.bottom-stage-panel .stage-btn .label,
+.stage-panel .stage-btn .label {
+  flex:1;
+  text-align:center;
+  color:#7a7a7a;
+  font-weight:600;
+}
+.bottom-stage-panel .stage-btn.active .label,
+.stage-panel .stage-btn.active .label { color:#333; font-weight:800; }
+
+/* done stages color the dot */
+.bottom-stage-panel .stage-btn.done .dot,
+.stage-panel .stage-btn.done .dot { background: var(--purple); }
+
+/* ensure bottom actions are visible and side-by-side where space allows */
+.bottom-stage-panel .bottom-actions{display:flex;gap:8px;margin-top:6px}
+.bottom-stage-panel .bottom-actions button{flex:1}
+
+/* ensure hidden is respected */
+.bottom-stage-panel.hidden{display:none !important;}
+
+/* --- Safe overrides: ensure main screens and orders are visible --- */
+.screen { display: block; } /* override if global styles hide them by default */
+.screen.hidden { display: none !important; }
+
+.order-list { display:flex; flex-direction:column; gap:12px; padding:0; margin:0; }
+.driver-quick-actions{
+  display:flex;
+  gap:10px;
+  margin:16px 0 4px 0;
+  flex-wrap:wrap;
+  width:100%;
+}
+.driver-quick-actions button{
+  min-width:0;
+  flex:1 1 0;
+  font-size:16px;
+  font-weight:700;
+}
+.order-card {
+  display:flex;
+  gap:14px;
+  align-items:flex-start;
+  background: #fff;
+  border-radius: 12px;
+  padding: 12px;
+  border: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+  cursor: pointer;
+}
+
+/* buttons inside card */
+.order-card .primary, .order-card .secondary {
+  min-width: 110px;
+}
+
+/* bottom stage panel (full width buttons, centered label, dot indicator) */
+#bottomStagePanel { display:flex; position:fixed; left:50%; transform:translateX(-50%); bottom:12px; flex-direction:column; gap:10px; align-items:stretch; width:min(920px,96%); padding:10px; z-index:1300; background:rgba(255,255,255,0.98); border-radius:12px; box-shadow:0 12px 32px rgba(0,0,0,0.06); }
+#bottomStagePanel.hidden{ display:none !important; }
+
+#bottomStagePanel .stage-btn { display:flex; align-items:center; justify-content:center; width:100%; padding:10px 16px; gap:8px; border:none !important; background:transparent; color:#6b6b6b; font-weight:600; position:relative; text-align:center; border-radius:10px; }
+#bottomStagePanel .stage-btn .dot { position:absolute; left:14px; width:10px; height:10px; border-radius:50%; background:rgba(0,0,0,0.08); }
+#bottomStagePanel .stage-btn .label{ flex:1; text-align:center; color:#6b6b6b; }
+#bottomStagePanel .stage-btn.active .label { color:#333; font-weight:800; }
+#bottomStagePanel .stage-btn.done .dot { background:var(--purple); }
+
+#bottomStagePanel .bottom-actions{display:flex; gap:8px; margin-top:6px;}
+#bottomStagePanel .bottom-actions button{flex:1; padding:10px; border-radius:8px; background:#fff; border:1px solid rgba(0,0,0,0.06); color:#333;}
+
+/* reduce overlaps: bump trip-steps when bottom panel visible */
+body.bottom-panel-visible .trip-steps { bottom: calc(14px + 260px) !important; }
+/* add safe space for content when bottom panel matosi */
+body.bottom-panel-visible main { padding-bottom: 320px; }
+/* add extra space in confirm pickup, kad QR/video neužliptų ant bottom panel */
+#confirmPickup{padding-bottom:260px;}
+@media (max-width:640px){
+  #confirmPickup{padding-bottom:220px;}
+}
+/* add extra space for mobile CTAs so panel neuždengtų */
+body.bottom-panel-visible #drivePickup,
+body.bottom-panel-visible #inTransit,
+body.bottom-panel-visible #arrivedConfirm{
+  padding-bottom: 320px;
+}
+@media (max-width:640px){
+  body.bottom-panel-visible #drivePickup,
+  body.bottom-panel-visible #inTransit,
+  body.bottom-panel-visible #arrivedConfirm{
+    padding-bottom: 280px;
+  }
+}
+
+/* Tablet/desktop: statusų (bottom) panelė į šoną */
+@media (min-width: 960px){
+  #bottomStagePanel{
+    top: 140px;
+    right: 20px;
+    left: auto;
+    transform: none;
+    bottom: auto;
+    width: 260px;
+    position: fixed;
+    align-items: stretch;
+  }
+  body.bottom-panel-visible .trip-steps { bottom: 24px !important; }
+  body.bottom-panel-visible main { padding-bottom: 80px; }
+}
+
+/* Mobile: sumažinam panelę, kad neliptų ant turinio */
+@media (max-width:640px){
+  #bottomStagePanel{
+    width: 94%;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 8px;
+  }
+  body.bottom-panel-visible main { padding-bottom: 240px; }
+}
+
+/* small screens: keep full width with side padding */
+@media (max-width:640px) {
+  #bottomStagePanel { left:8px; right:8px; transform:none; width:auto; padding:8px; }
+  #bottomStagePanel .stage-btn { padding:8px 12px; font-size:14px; }
+  #bottomStagePanel .stage-btn .dot { left:12px; width:9px; height:9px; }
+}
+
+/* --- Bottom action buttons: traffic (yellow) and SOS (pink) --- */
+.bottom-stage-panel .bottom-actions {
+  display:flex;
+  gap:8px;
+  align-items:center;
+  padding:6px 0;
+}
+
+/* Shared button layout */
+.bottom-stage-panel .bottom-actions button {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding:8px 12px;
+  font-size:13px;
+  border-radius:8px;
+  min-width:44px;
+  flex:1;                       /* evenly distribute */
+  border:1px solid rgba(0,0,0,0.06);
+  box-shadow:none;
+  cursor:pointer;
+  transition: transform 80ms ease, box-shadow 120ms ease, filter 80ms ease;
+}
+
+/* Traffic: yellow, subtle gradient */
+.bottom-stage-panel .bottom-actions .traffic-btn {
+  background: linear-gradient(180deg,#fff8e1 0%,#fff1b8 100%) !important;
+  color: #7a4a00 !important;
+  border-color: rgba(122,62,0,0.10) !important;
+  /* subtle inset */
+  box-shadow: 0 1px 0 rgba(255,255,255,0.6) inset;
+}
+.bottom-stage-panel .bottom-actions .traffic-btn.active {
+  filter: saturate(1.05) brightness(0.98);
+}
+
+/* SOS: pink, subtle gradient */
+.bottom-stage-panel .bottom-actions .sos-btn {
+  background: linear-gradient(180deg,#fff0f4 0%,#ffcde0 100%) !important;
+  color: #7a0730 !important;
+  border-color: rgba(122,7,48,0.10) !important;
+  box-shadow: 0 1px 0 rgba(255,255,255,0.6) inset;
+}
+.bottom-stage-panel .bottom-actions .sos-btn.active {
+  filter: saturate(1.05) brightness(0.98);
+}
+
+/* Icons (emoji) left aligned — ensure they don't break the centered label look */
+.bottom-stage-panel .bottom-actions button span.icon,
+.bottom-stage-panel .bottom-actions button::before { /* fallback if you use ::before */
+  display:inline-block;
+  margin-right:6px;
+}
+
+/* Hover / focus */
+.bottom-stage-panel .bottom-actions button:not(:disabled):hover,
+.bottom-stage-panel .bottom-actions button:not(:disabled):focus {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.06);
+}
+
+/* Small screens */
+@media (max-width:640px) {
+  .bottom-stage-panel .bottom-actions { gap:6px; }
+  .bottom-stage-panel .bottom-actions button { padding:6px 8px; font-size:12px; border-radius:8px; }
+}
+
+/* Optional: if there's a global rule forcing text color, force icon/text color override */
+.bottom-stage-panel .bottom-actions .traffic-btn,
+.bottom-stage-panel .bottom-actions .sos-btn {
+  color: inherit; /* keep specific colors above */
+}
+
+/* QR scanner styles */
+#qrContainer { display:flex;flex-direction:column;align-items:center;gap:8px;background:#fff;border-radius:8px;padding:8px;border:1px solid rgba(0,0,0,0.06);width:100%;}
+#qrVideo { width:100%;height:240px;border-radius:8px;background:#000;object-fit:cover }
+#qrResult { font-size:13px;color:#333 }
+#qrError { display:none }
+#qrWrap.hidden{ display:none !important; }
+#qrWrap { display:block }
+
+/* QR scanner: smaller/responsive, no overlap */
+#qrContainer {
+  width: 100%;
+  max-width: 360px;          /* limit width so it doesn't become too large */
+  margin: 0 auto 10px;       /* center and add space below */
+  z-index: 1290;             /* just under the panel */
+  position: relative;
+  background: #fff;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid rgba(0,0,0,0.06);
+}
+
+/* Ensure video preserves aspect ratio and isn't huge */
+#qrVideo {
+  width: 100%;
+  max-height: 220px;         /* default limited height */
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* Reduced variant used while scanning to avoid overlaying content */
+#qrContainer.qr-small #qrVideo {
+  max-height: 160px;         /* smaller scan frame */
+}
+
+/* Even smaller on narrow screens */
+@media (max-width: 640px) {
+  #qrContainer { max-width: 320px; margin-bottom: 8px; }
+  #qrVideo { max-height: 160px; }
+  #qrContainer.qr-small #qrVideo { max-height: 120px; }
+}
+
+/* Ensure result area and controls are below video and visible */
+#qrResult { margin-top: 8px; font-size: 13px; color: #333; z-index: 1291; }
+#qrError { margin-top: 8px; z-index: 1291; }
+
+/* If the QR area is still overlapping, allow the container to scroll rather than overlay */
+#qrWrap { overflow:auto; }
+
+/* Avatar holder for order list (only avatar, no car icon) */
+.order-card .avatar-wrap {
+  width: 64px;
+  height: 64px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:12px;
+  overflow:hidden;
+  flex: 0 0 auto;
+  background: transparent; /* remove any background */
+}
+
+/* Avatar image style */
+.order-card .avatar { width:64px; height:64px; object-fit:cover; border-radius:50%; }
+
+/* smaller on tiny screens */
+@media (max-width:420px){
+  .order-card .avatar-wrap { width:48px; height:48px; }
+  .order-card .avatar { width:48px; height:48px; }
+}
+
+/* If any car icon class remained, hide it */
+.order-card .vehicle-icon, .order-card img.vehicle, .order-card .car-icon { display:none !important; }
+/* Hide remote flaticon car icons if used accidentally in order cards */
+.order-card img[src*="flaticon.com/512/1154/"] { display:none !important; }
+
+/* Adjust spacing now that car is removed */
+.order-card { gap: 14px; align-items:center; }
+
+/* hide the time text if present */
+.order-card .small.time, .order-card .small:contains("Laikas:") { display:none !important; }
+
+/* Pickup / dropoff styling */
+.order-card .card-meta .pickup,
+.order-card .card-meta .dropoff {
+  color: #4b5563; /* dark gray */
+  font-size: 14px;
+  margin-top: 2px;
+}
+
+/* Optional: highlight pickup vs dropoff a bit */
+.order-card .card-meta .pickup { color: #333; font-weight:600; }
+.order-card .card-meta .dropoff { color: #58606a; }
+
+/* Keep layout tidy */
+.order-card .card-meta { display:flex; flex-direction:column; gap:4px; }

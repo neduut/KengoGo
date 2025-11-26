@@ -1,0 +1,620 @@
+<!doctype html>
+<html lang="lt">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Vairuotojo modulis - KengoGo</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="driver.css" />
+</head>
+<body>
+  <header class="driver-topbar">
+    <div class="driver-brand">
+      <div class="driver-logo-wrap">
+        <img src="img/kangaroo-transparent.png" alt="KengoGo logotipas" class="driver-logo" />
+      </div>
+      <span class="driver-brand-text">KengoGo</span>
+    </div>
+    <div class="driver-actions">
+      <button class="driver-icon-btn" id="driverNotifBtn" aria-label="Pranešimai">🔔<span class="driver-badge">2</span></button>
+      <button class="driver-avatar-btn" id="driverProfileBtn" aria-label="Vairuotojo profilis">
+        <img class="driver-avatar" src="https://cdn-icons-png.flaticon.com/512/1535/1535791.png" alt="Vairuotojo avataras" />
+      </button>
+    </div>
+  </header>
+
+  <div id="driverProfileCard" class="driver-profile hidden" role="dialog" aria-modal="false" aria-label="Vairuotojo informacija">
+    <div class="driver-profile-header">
+      <img class="driver-avatar" src="https://cdn-icons-png.flaticon.com/512/1535/1535791.png" alt="Vairuotojo avataras" />
+      <div>
+        <div class="driver-name">Antanas Kuzminckas</div>
+        <div class="driver-meta">Vairuotojas • 4.9 ★</div>
+      </div>
+    </div>
+    <div class="driver-profile-row"><strong>Automobilis:</strong> Volvo XC90 • ABC123</div>
+    <div class="driver-profile-row"><strong>Tel.:</strong> +370 612 34567</div>
+    <div class="driver-profile-row"><strong>Patirtis:</strong> 5 metai</div>
+  </div>
+
+  <div id="driverNotifCard" class="driver-notifs hidden" role="dialog" aria-modal="false" aria-label="Pranešimai">
+    <div class="driver-notif-item">
+      <div class="driver-notif-icon">🚗</div>
+      <div>
+        <div class="driver-notif-title">Naujas užsakymas</div>
+        <div class="driver-notif-time">Prieš 2 min</div>
+      </div>
+    </div>
+    <div class="driver-notif-item">
+      <div class="driver-notif-icon">✅</div>
+      <div>
+        <div class="driver-notif-title">Patvirtinote paėmimą</div>
+        <div class="driver-notif-time">Prieš 10 min</div>
+      </div>
+    </div>
+  </div>
+
+  <main style="max-width:920px;margin:20px auto;padding:16px">
+    <section id="driverHome" class="screen">
+      <h2>Gauti užsakymai</h2>
+      <div id="orderList" class="order-list"></div>
+      <div class="driver-quick-actions">
+        <button class="secondary" id="historyBtn">Istorija</button>
+        <button class="secondary" id="helpBtn">Pagalba</button>
+      </div>
+    </section>
+
+    <section id="orderDetails" class="screen hidden">
+      <button class="secondary" id="backToList">Atgal</button>
+      <h2>Užsakymo informacija</h2>
+      <div class="summary-card" id="orderSummary"></div>
+      <div style="margin-top:12px" class="controls">
+        <button class="primary" id="acceptOrder">Priimti užsakymą</button>
+        <button class="secondary" id="declineOrder">Atmesti</button>
+      </div>
+    </section>
+
+    <section id="drivePickup" class="screen hidden">
+      <h2>Važiuoji į paėmimo vietą</h2>
+      <div class="map-viewport" id="mapPickup"></div>
+      <div class="small" style="margin-top:8px">ETA: <span id="etaPickup">--</span></div>
+      <div class="controls" style="margin-top:12px">
+        <button id="arrivedPickupBtn" class="primary big-action">Atvykau į paėmimo vietą</button>
+        <button id="cancelJob" class="secondary big-action">Atšaukti</button>
+      </div>
+    </section>
+
+    <section id="confirmPickup" class="screen hidden">
+      <h2>Patvirtinti paėmimą</h2>
+
+      <!-- Toggle: PIN or QR -->
+      <div style="display:flex;gap:8px;margin-bottom:10px">
+        <button id="usePinBtn" class="secondary">PIN</button>
+        <button id="useQrBtn" class="secondary">QR</button>
+      </div>
+
+      <!-- PIN input -->
+      <div id="pinWrap">
+        <div style="margin-top:8px" class="summary-card">
+          <div class="line"><strong>PIN:</strong> <span id="orderPin">—</span></div>
+        </div>
+        <div style="margin-top:8px">
+          <input id="pinInput" type="text" placeholder="Įveskite PIN" />
+        </div>
+        <div class="controls" style="margin-top:12px">
+          <button id="confirmPinBtn" class="primary">Patvirtinti</button>
+          <button id="backToDriveBtn" class="secondary">Atgal</button>
+        </div>
+        <div id="pinError" class="small" style="color:#e03032;display:none;margin-top:8px">Netinkamas PIN</div>
+      </div>
+
+      <!-- QR scanner -->
+      <div id="qrWrap" class="hidden">
+        <div id="qrContainer" class="qr-mock">
+          <video id="qrVideo" autoplay playsinline style="width:100%;height:auto;border-radius:8px;background:#000"></video>
+          <div id="qrResult" class="small" style="margin-top:8px"></div>
+        </div>
+
+        <div class="controls" style="margin-top:8px;display:flex;gap:8px;align-items:center">
+          <button id="startQrScan" class="secondary">Skenuoti QR</button>
+          <button id="stopQrScan" class="secondary hidden">Sustabdyti</button>
+          <input id="manualQrInput" type="text" placeholder="Jeigu nepavyksta, įklijuokite QR tekstą" style="flex:1;padding:8px;border-radius:8px;border:1px solid #ddd" />
+          <button id="verifyQrBtn" class="primary">Patikrinti</button>
+        </div>
+
+        <div class="small" style="margin-top:6px;color:#666">
+          Pastaba: jei įrenginys nepalaiko QR skenavimo, naudokite rankinį teksto įvedimą arba įkelkite QR paveikslėlį (neprivaloma).
+        </div>
+        <div id="qrError" class="small" style="color:#e03032;display:none;margin-top:8px"></div>
+      </div>
+    </section>
+
+    <section id="inTransit" class="screen hidden">
+      <h2>Vykstu pagal maršrutą</h2>
+      <div class="map-viewport"></div>
+      <div class="controls" style="margin-top:12px">
+        <button id="arrivedDestinationBtn" class="primary big-action">Atvykau į paskirties vietą</button>
+        <button id="abortTrip" class="secondary big-action">Atšaukti kelionę</button>
+      </div>
+    </section>
+
+    <section id="arrivedConfirm" class="screen hidden">
+      <h2>Vaiko atvykimo patvirtinimas</h2>
+      <div class="summary-card" style="margin-top:8px">
+        <div class="line"><strong>Vaikas:</strong> <span id="arrivedChild">-</span></div>
+        <div class="line"><strong>Atvykimo laikas:</strong> <span id="arrivedTime">-</span></div>
+      </div>
+      <div class="controls" style="margin-top:12px">
+        <button id="completeTripBtn" class="primary big-action">Užbaigti kelionę</button>
+      </div>
+    </section>
+
+    <section id="tripComplete" class="screen hidden">
+      <h2>Kelionė užbaigta</h2>
+      <div class="summary-card">Kelionė sėkmingai užbaigta. Ačiū!</div>
+      <div class="controls" style="margin-top:12px">
+        <button class="primary" id="backToDashboard">Grįžti į sąrašą</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Bottom stage + actions panel -->
+  <div id="bottomStagePanel" class="bottom-stage-panel hidden" aria-hidden="true" role="menu">
+    <button class="stage-btn" data-stage="arrivedPickup" disabled><span class="dot"></span><span class="label">Atvykau į paėmimo vietą</span></button>
+    <button class="stage-btn" data-stage="confirmPickup" disabled><span class="dot"></span><span class="label">Patvirtinau paėmimą</span></button>
+    <button class="stage-btn" data-stage="inTransit" disabled><span class="dot"></span><span class="label">Vykstu į paskirties vietą</span></button>
+    <button class="stage-btn" data-stage="arrivedDestination" disabled><span class="dot"></span><span class="label">Atvykau į paskirties vietą</span></button>
+    <button class="stage-btn" data-stage="completed" disabled><span class="dot"></span><span class="label">Kelionė užbaigta</span></button>
+
+    <div class="bottom-actions">
+      <button id="bottomTraffic" class="traffic-btn">🚦 Kamštyje</button>
+      <button id="bottomSos" class="sos-btn">🚨 SOS</button>
+    </div>
+  </div>
+
+  <div id="driverToast" class="driver-toast hidden">Sėkmingai</div>
+
+  <script>
+    (function(){
+      const $ = sel => document.querySelector(sel);
+      const open = id => { document.querySelectorAll('.screen').forEach(s => s.classList.add('hidden')); document.getElementById(id).classList.remove('hidden'); };
+
+      const orders = [
+        { id: 'O-1001', child: 'Vėjas', childId: 'vejas', avatar:'img/vejas.png', age: 7, pickup: 'Namai', dropoff: 'Mokykla', time: '08:00', pin: '1234', eta: '6 min' },
+        { id: 'O-1002', child: 'Ula',  childId: 'ula',  avatar:'https://cdn-icons-png.flaticon.com/512/706/706830.png', age: 9, pickup: 'P. Pletnevo g. 15', dropoff: 'Darželis', time: '09:15', pin: '5678', eta: '12 min' }
+      ];
+      // expose to the QR/PIN module
+      window.orders = orders;
+      // trip stages (used by stage panel and CTA flow)
+      const stages = ['received','accepted','arrivedPickup','confirmPickup','inTransit','arrivedDestination','completed'];
+      let currentStage = null;
+      let currentOrderId = null;
+      const driverProfile = {
+        name: 'Antanas Kuzminckas',
+        rating: '4.9 ★',
+        car: 'Volvo XC90 • ABC123',
+        phone: '+370 612 34567',
+        experience: '5 metai'
+      };
+
+      // map children to known avatars (same icons as index.html)
+      const CHILD_AVATARS = {
+        'vejas': 'img/vejas.png',
+        'ula':  'https://cdn-icons-png.flaticon.com/512/706/706830.png'
+      };
+      // stable inline fallback so we always show something if external icon fails
+      const DEFAULT_AVATAR = 'data:image/svg+xml;utf8,' + encodeURIComponent(
+        `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+          <defs>
+            <linearGradient id="g" x1="0%" x2="100%" y1="0%" y2="100%">
+              <stop stop-color="#e8f0fe" offset="0"/>
+              <stop stop-color="#cfd8dc" offset="1"/>
+            </linearGradient>
+          </defs>
+          <rect width="100" height="100" rx="18" fill="url(#g)"/>
+          <circle cx="50" cy="40" r="18" fill="#ffffff"/>
+          <rect x="28" y="58" width="44" height="26" rx="12" fill="#ffffff"/>
+        </svg>`
+      );
+
+      function normalizeName(name=''){
+        return String(name).trim().normalize('NFD').replace(/\p{Diacritic}/gu,'').toLowerCase();
+      }
+
+      function avatarFor(o){
+        if(o?.avatar) return o.avatar;
+        if(o?.childId && CHILD_AVATARS[o.childId]) return CHILD_AVATARS[o.childId];
+        const norm = normalizeName(o?.child);
+        if(norm && CHILD_AVATARS[norm]) return CHILD_AVATARS[norm];
+        return DEFAULT_AVATAR;
+      }
+
+      function renderOrders(){
+        const root = $('#orderList');
+        if(!root) return;
+        root.innerHTML = '';
+        orders.forEach(o => {
+          const avatarSrc = avatarFor(o);
+          const card = document.createElement('div');
+          card.className = 'order-card';
+          card.dataset.id = o.id;
+          // debug to console if avatar resolution fails
+          console.log('renderOrders avatar', o.child, avatarSrc);
+          card.innerHTML = `
+            <div class="avatar-wrap">
+              <img class="avatar" src="${avatarSrc}" alt="${o.child} avatar" onerror="this.onerror=null;this.src='${DEFAULT_AVATAR}'"/>
+            </div>
+
+            <div class="card-meta">
+              <div class="title">
+                <h3>${o.child} • ${o.age} m.</h3>
+              </div>
+
+              <!-- Pickup / Dropoff shown clearly (no time) -->
+              <div class="small pickup">Paėmimas: ${o.pickup}</div>
+              <div class="small dropoff">Atvežimas: ${o.dropoff}</div>
+            </div>
+
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <button class="primary viewOrder" data-id="${o.id}">Peržiūrėti</button>
+              <button class="secondary quickAccept" data-id="${o.id}">Priimti</button>
+            </div>`;
+          root.appendChild(card);
+        });
+        attachOrderHandlers();
+      }
+
+      function attachOrderHandlers(){
+        document.querySelectorAll('.viewOrder').forEach(btn => btn.addEventListener('click', e => {
+          e.stopPropagation();
+          openOrderDetails(e.currentTarget.dataset.id);
+        }));
+        document.querySelectorAll('.quickAccept').forEach(btn => btn.addEventListener('click', e => {
+          e.stopPropagation();
+          acceptOrderById(e.currentTarget.dataset.id);
+        }));
+        document.querySelectorAll('.order-card').forEach(card => card.addEventListener('click', e => {
+          if (e.target.closest('button')) return;
+          currentOrderId = card.dataset.id;
+          setStage('received');
+          open('orderDetails');
+        }));
+      }
+
+      function openOrderDetails(id){
+        const order = orders.find(o => o.id === id);
+        if (!order) return;
+        $('#orderSummary').innerHTML = `
+          <div class="line"><strong>Užsakymas:</strong> ${order.id}</div>
+          <div class="line"><strong>Vaikas:</strong> ${order.child} (${order.age} m.)</div>
+          <div class="line"><strong>Paėmimas:</strong> ${order.pickup}</div>
+          <div class="line"><strong>Atvežimas:</strong> ${order.dropoff}</div>`;
+        $('#acceptOrder') && ($('#acceptOrder').dataset.id = id);
+        currentOrderId = id;
+        open('orderDetails');
+      }
+
+      function acceptOrderById(id){
+        if(!id) return;
+        currentOrderId = id;
+        $('#acceptOrder') && ($('#acceptOrder').dataset.id = id);
+        const order = orders.find(o => o.id === id);
+        $('#etaPickup') && ($('#etaPickup').textContent = order?.eta ?? '--');
+        setStage('accepted');
+        open('drivePickup');
+      }
+
+      function showToast(text, ms=3000){
+        const t = $('#driverToast');
+        if(!t) return;
+        t.textContent = text;
+        t.classList.remove('hidden');
+        clearTimeout(t._timeout);
+        t._timeout = setTimeout(()=>t.classList.add('hidden'), ms);
+      }
+
+      const bottomStagePanel = $('#bottomStagePanel');
+      function showBottomStagePanel(show){
+        if(!bottomStagePanel) return;
+        bottomStagePanel.classList.toggle('hidden', !show);
+        bottomStagePanel.setAttribute('aria-hidden', String(!show));
+        document.body.classList.toggle('bottom-panel-visible', show);
+      }
+
+      function setStage(stage){
+        if(stage === null){
+          currentStage = null;
+          document.querySelectorAll('.stage-btn').forEach(b => { b.classList.remove('active','done'); b.disabled = true; });
+          showBottomStagePanel(false);
+          open('driverHome');
+          return;
+        }
+        currentStage = stage;
+        const currentIndex = stages.indexOf(stage);
+        document.querySelectorAll('.stage-btn').forEach(b => {
+          const s = b.dataset.stage;
+          const idx = stages.indexOf(s);
+          b.classList.toggle('active', idx === currentIndex);
+          b.classList.toggle('done', idx < currentIndex);
+          b.disabled = idx > currentIndex;
+        });
+        showBottomStagePanel(currentIndex >= stages.indexOf('arrivedPickup'));
+        switch(stage){
+          case 'accepted': open('drivePickup'); break;
+          case 'arrivedPickup': open('confirmPickup'); break;
+          case 'confirmPickup': open('inTransit'); break;
+          case 'inTransit': open('inTransit'); break;
+          case 'arrivedDestination': open('arrivedConfirm'); break;
+          case 'completed': open('tripComplete'); break;
+          default: open('driverHome'); break;
+        }
+      }
+
+      document.addEventListener('click', (e) => {
+        const btn = e.target.closest('#bottomStagePanel .stage-btn');
+        if (!btn) return;
+        if (btn.disabled) return;
+        setStage(btn.dataset.stage);
+      });
+
+      // driver profile + notif toggles
+      const profileBtn = $('#driverProfileBtn');
+      const profileCard = $('#driverProfileCard');
+      const notifBtn = $('#driverNotifBtn');
+      const notifCard = $('#driverNotifCard');
+      function hideProfile(){ profileCard?.classList.add('hidden'); }
+      function hideNotif(){ notifCard?.classList.add('hidden'); }
+      function toggleProfile(){
+        if(!profileCard) return;
+        profileCard.classList.toggle('hidden');
+        hideNotif();
+      }
+      function toggleNotif(){
+        if(!notifCard) return;
+        notifCard.classList.toggle('hidden');
+        hideProfile();
+      }
+      profileBtn?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleProfile();
+      });
+      notifBtn?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleNotif();
+      });
+      document.addEventListener('click', (e) => {
+        const inProfile = e.target.closest('#driverProfileCard') || e.target.closest('#driverProfileBtn');
+        const inNotif = e.target.closest('#driverNotifCard') || e.target.closest('#driverNotifBtn');
+        if(!inProfile) hideProfile();
+        if(!inNotif) hideNotif();
+      });
+
+      // bottom traffic + sos handlers
+      $('#bottomTraffic')?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const el = e.currentTarget;
+        el.classList.toggle('active');
+        showToast(el.classList.contains('active') ? 'Pažymėta: stoviu kamštyje' : 'Kamščio būsena išjungta');
+      });
+
+      $('#bottomSos')?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (!currentOrderId) { alert('Pasirinkite užsakymą'); return; }
+        if (!confirm('⚠️ AR TIKRAI? Siųsti SOS?')) return;
+        showToast('SOS išsiųstas — pagalba bus informuota', 4000);
+      });
+
+      // CTA flow handlers
+      $('#arrivedPickupBtn')?.addEventListener('click', () => {
+        const id = window.currentOrderId || $('#acceptOrder')?.dataset?.id;
+        const order = orders.find(o => o.id === id);
+        if (order) { $('#orderPin') && ($('#orderPin').textContent = order.pin); $('#pinInput') && ($('#pinInput').value = ''); }
+        setStage('arrivedPickup');
+      });
+
+      $('#confirmPinBtn')?.addEventListener('click', () => {
+        const id = currentOrderId || $('#acceptOrder')?.dataset?.id;
+        const order = orders.find(o => o.id === id);
+        const val = $('#pinInput')?.value?.trim();
+        if (order && val === order.pin) setStage('confirmPickup');
+        else $('#pinError') && ($('#pinError').style.display = 'block');
+      });
+
+      $('#backToDriveBtn')?.addEventListener('click', () => open('drivePickup'));
+      $('#cancelJob')?.addEventListener('click', () => { if (confirm('Ar tikrai atšaukti?')) { currentOrderId = null; setStage(null); open('driverHome'); } });
+      $('#abortTrip')?.addEventListener('click', () => { if (confirm('Ar tikrai atšaukti?')) { currentOrderId = null; setStage(null); open('driverHome'); } });
+
+      $('#arrivedDestinationBtn')?.addEventListener('click', () => {
+        const id = currentOrderId || $('#acceptOrder')?.dataset?.id;
+        const order = orders.find(o => o.id === id);
+        if (order) {
+          $('#arrivedChild') && ($('#arrivedChild').textContent = order.child);
+          $('#arrivedTime') && ($('#arrivedTime').textContent = new Date().toLocaleTimeString());
+        }
+        setStage('arrivedDestination');
+      });
+
+      $('#completeTripBtn')?.addEventListener('click', () => {
+        const id = currentOrderId || $('#acceptOrder')?.dataset?.id;
+        const idx = orders.findIndex(o => o.id === id);
+        let child = '-';
+        if (idx >= 0) {
+          child = orders[idx].child;
+          orders.splice(idx, 1);
+        } else {
+          const order = orders.find(o => o.id === id);
+          if (order) child = order.child;
+        }
+        renderOrders();
+        $('#tripComplete .summary-card') && ($('#tripComplete .summary-card').innerHTML = `<div class="line"><strong>Vaikas:</strong> ${child}</div><div class="line"><strong>Atvykimo laikas:</strong> ${new Date().toLocaleTimeString()}</div>`);
+        setStage('completed');
+        currentOrderId = null;
+      });
+
+      $('#backToList')?.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        // reset current flow, hide bottom panel, re-render list and show home
+        try {
+          setStage(null);
+        } catch (err) { /* ignore if not defined */ }
+        try {
+          showBottomStagePanel(false);
+        } catch (err) { /* ignore if not defined */ }
+        try { renderOrders(); } catch(err) {}
+        open('driverHome');
+      });
+
+      // tripComplete "Grįžti į sąrašą" button handler
+      $('#backToDashboard')?.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        try { setStage(null); } catch (err) {}
+        try { showBottomStagePanel(false); } catch (err) {}
+        try { renderOrders(); } catch (err) {}
+        open('driverHome');
+      });
+
+      $('#acceptOrder')?.addEventListener('click', (e) => { const id = e.currentTarget.dataset.id; acceptOrderById(id); });
+      $('#declineOrder')?.addEventListener('click', () => { currentOrderId = null; setStage(null); open('driverHome'); });
+
+      // Initialize
+      renderOrders();
+      setStage(null);
+      open('driverHome');
+
+      // Quick helpers for debugging in console:
+      window.setStage = setStage;
+      window.openOrderDetails = openOrderDetails;
+    })();
+  </script>
+
+  <script>
+    // ...existing code...
+      (function(){
+        const $ = s => document.querySelector(s);
+      let qrStream = null;
+      let detector = null;
+      let scanning = false;
+      const video = document.getElementById('qrVideo');
+
+      function showConfirmPickupUI(use='pin'){
+        $('#pinWrap').classList.toggle('hidden', use !== 'pin');
+        $('#qrWrap').classList.toggle('hidden', use !== 'qr');
+      }
+
+      // Toggle handlers
+      $('#usePinBtn')?.addEventListener('click', ()=>showConfirmPickupUI('pin'));
+      $('#useQrBtn')?.addEventListener('click', ()=>showConfirmPickupUI('qr'));
+
+      // Confirm PIN
+      $('#confirmPinBtn')?.addEventListener('click', ()=>{
+        const id = window.currentOrderId || $('#acceptOrder')?.dataset?.id;
+        const order = (window.orders||[]).find(o => o.id === id);
+        if(!order) return;
+        const val = $('#pinInput')?.value?.trim();
+        if(val && val === order.pin) {
+          $('#pinError').style.display = 'none';
+          // success
+          setStage('confirmPickup');
+        } else {
+          $('#pinError').style.display = 'block';
+        }
+      });
+
+      async function startQrScan(){
+        $('#qrError') && ($('#qrError').style.display = 'none');
+        // smaller scan-frame to avoid overlap
+        $('#qrContainer') && $('#qrContainer').classList.add('qr-small');
+        // check BarcodeDetector support
+        try {
+          if ('BarcodeDetector' in window) {
+            detector = new BarcodeDetector({formats:['qr_code']});
+          } else {
+            detector = null;
+          }
+        } catch(e){ detector = null; }
+        try {
+          // request camera
+          qrStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' }});
+          video.srcObject = qrStream;
+          video.play();
+          $('#startQrScan')?.classList.add('hidden');
+          $('#stopQrScan')?.classList.remove('hidden');
+          scanning = true;
+          if(detector){
+            scanLoop();
+          } else {
+            $('#qrResult').textContent = 'QR skenavimas nepalaikomas šioje naršyklėje. Galite įklijuoti QR tekstą apačioje.';
+          }
+        } catch(err){
+          $('#qrError').textContent = 'Kamera negarantuojamai prieinama: ' + (err.message || err.name);
+          $('#qrError').style.display = 'block';
+        }
+      }
+
+      function stopQrScan(){
+        scanning = false;
+        if (qrStream) {
+          const tracks = qrStream.getTracks();
+          tracks.forEach(t => t.stop());
+          qrStream = null;
+        }
+        video.srcObject = null;
+        $('#startQrScan')?.classList.remove('hidden');
+        $('#stopQrScan')?.classList.add('hidden');
+        // restore video size
+        $('#qrContainer') && $('#qrContainer').classList.remove('qr-small');
+      }
+
+      async function scanLoop(){
+        if(!scanning) return;
+        try {
+          const result = await detector.detect(video);
+          if(result && result.length){
+            handleQrResult(result[0].rawValue);
+            stopQrScan();
+            return;
+          }
+        } catch(err){
+          // detection can throw on unsupported frames — ignore
+        }
+        // continue scanning
+        setTimeout(scanLoop, 250);
+      }
+
+      function handleQrResult(raw){
+        $('#qrResult').textContent = 'QR: ' + raw;
+        // attempt verification
+        verifyQr(raw);
+      }
+
+      function verifyQr(text){
+        const id = window.currentOrderId || $('#acceptOrder')?.dataset?.id;
+        const order = (window.orders||[]).find(o => o.id === id);
+        if(!order) return;
+          // Accept QR if contains PIN or order ID
+        if(String(text).includes(String(order.pin)) || String(text).includes(String(order.id))){
+          $('#qrError').style.display = 'none';
+          setStage('confirmPickup');
+          $('#qrResult').textContent = 'Sėkmingai patvirtinta';
+        } else {
+          $('#qrError').textContent = 'QR neatitinka užsakymo duomenų';
+          $('#qrError').style.display = 'block';
+        }
+      }
+
+      // Buttons
+      $('#startQrScan')?.addEventListener('click', startQrScan);
+      $('#stopQrScan')?.addEventListener('click', stopQrScan);
+      $('#verifyQrBtn')?.addEventListener('click', ()=>{
+        const raw = $('#manualQrInput')?.value?.trim();
+        if(!raw) { $('#qrError').textContent = 'Įveskite QR tekstą arba nuskaitykite'; $('#qrError').style.display = 'block'; return; }
+        verifyQr(raw);
+      });
+
+      // cleanup on leave or when stage is null
+      window.stopQrScan = stopQrScan;
+    })();
+  </script>
+</body>
+</html>

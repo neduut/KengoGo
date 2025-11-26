@@ -11,7 +11,12 @@
   <div class="app">
     <!-- Viršutinė juosta: logotipas, pranešimų mygtukas, profilio mygtukas -->
     <header class="topbar">
-      <button class="logo" id="logoBtn">KengoGo</button>
+      <button class="logo brand" id="logoBtn">
+        <span class="logo-wrap">
+          <img src="img/kangaroo-transparent.png" alt="KengoGo" onerror="this.onerror=null;this.src='../logo.PNG';" />
+        </span>
+        <span class="logo-text">KengoGo</span>
+      </button>
       <div class="top-actions">
         <button class="icon-btn" id="notifBtn" aria-label="Pranešimai">🔔<span class="badge" id="notifBadge">2</span></button>
         <button class="icon-btn" id="profileBtn" aria-label="Profilis"><img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Profilis" class="profile-icon" /></button>
@@ -276,6 +281,22 @@
         if(confirm('⚠️ KRITINĖ SITUACIJA!\n\nAr tikrai norite siųsti SOS signalą?\n\nBus informuoti:\n• Vairuotojas\n• Greitosios pagalbos tarnyba\n• Jūsų nurodyti kontaktai')) {
           alert('🚨 SOS signalas išsiųstas!\n\nPagalba jau kelyje.');
         }
+      });
+    });
+    
+    // Naujas: atidaryti aktyvią kelionę paspaudus ant kortelės
+    document.querySelectorAll('.trip-card').forEach(card => {
+      card.addEventListener('click', () => open('activeTrip'));
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open('activeTrip') }
+      });
+    });
+    // Sustabdyti kortelės click propagavimą iš mygtukų, pvz. 'call-driver'
+    document.querySelectorAll('.call-driver').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation(); // neužves navigacijos
+        // čia galima pridėti tikrą funkciją arba mock
+        alert('Skambinama vairuotojui (mock)...');
       });
     });
     

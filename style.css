@@ -7,36 +7,78 @@
   --bg: #f7f5ff;
 }
 *{box-sizing:border-box}
-body{font-family:Inter,Segoe UI,Arial,sans-serif;background:var(--bg);margin:0;color:#111}
-.app{max-width:920px;margin:24px auto;background:var(--purple-light);border-radius:12px;overflow:hidden;box-shadow:0 6px 22px rgba(20,10,40,0.08)}
+body{font-family:Inter,Segoe UI,Arial,sans-serif;background:var(--bg);margin:0;color:#111;overflow-x:hidden}
+.app{max-width:920px;margin:20px auto;background:var(--purple-light);border-radius:0;overflow:hidden;box-shadow:none;width:100%;box-sizing:border-box;padding:0 12px;}
 
-.topbar{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;background:linear-gradient(90deg,var(--purple),var(--purple-dark));color:var(--purple-light)}
-/* Viršutinė juosta: logotipas ir veiksmai; pateikti kontrastinga spalva, kad būtų akcentas */
-.topbar{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;background:linear-gradient(90deg,var(--purple),var(--purple-dark));color:var(--purple-light)}
-.logo{font-weight:700;font-size:23px;background:transparent;border:0;color:#fff;cursor:pointer;padding:0;transition:opacity 0.2s}
-.logo:hover{opacity:0.8}
-.logo:active{background:rgba(255,212,59,0.2);border-radius:8px;padding:4px 8px}
+.topbar{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;background:linear-gradient(90deg,var(--purple),var(--purple-dark));color:#fff}
+/* Viršutinė juosta: logotipas ir veiksmai */
+.topbar{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;background:linear-gradient(90deg,var(--purple),var(--purple-dark));color:#fff}
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:900;
+  font-size:24px;
+  background:transparent;
+  border:0;
+  color:#fff;
+  cursor:pointer;
+  padding:0;
+  transition:opacity 0.2s;
+  text-shadow:0 2px 6px rgba(0,0,0,0.16);
+}
+.logo:hover{opacity:0.88}
+.logo:active{opacity:0.78}
+.logo-wrap{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:auto;
+  height:auto;
+}
+.logo-wrap img{
+  height:64px;
+  width:auto;
+  object-fit:contain;
+  display:block;
+  filter:
+    drop-shadow(0 2px 6px rgba(0,0,0,0.22))
+    drop-shadow(0 0 8px rgba(255,255,255,0.20)); /* subtilus šviesus kontūras ant violetinio fono */
+}
+.logo-text{
+  line-height:1;
+  font-size:26px;
+  font-weight:900;
+  letter-spacing:-0.4px;
+  color:#fff;
+  text-shadow:0 2px 6px rgba(0,0,0,0.18);
+}
 .top-actions{display:flex;gap:8px}
-.icon-btn{background:transparent;border:0;color:var(--purple-light);font-size:18px;padding:8px;border-radius:8px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:background 0.2s}
+.icon-btn{background:transparent;border:0;color:#fff;font-size:18px;padding:8px;border-radius:8px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:background 0.2s}
 .icon-btn:hover{background:rgba(255,212,59,0.15)}
 .icon-btn:active{background:rgba(255,212,59,0.3)}
 .icon-btn .badge{background:var(--yellow);color:#111;border-radius:999px;padding:2px 6px;margin-left:6px;font-size:12px}
 .profile-icon{width:30px;height:30px;display:block}
 
 /* Ekranų konteineris: talpina visus prototipo žingsnius ir leidžia juos slėpti/rodyti */
-.screens{padding:20px;min-height:calc(75vh - 70px)}
+.screens{padding:16px;min-height:calc(75vh - 70px)}
 .screen{display:block;min-height:100px;}
 .hidden{display:none}
 
 .quick-select h3{margin:0 0 8px 0}
 /* 'Mano vaikai' blokas: greito pasirinkimo vaikai */
 .child-list{display:flex;gap:12px;align-items:stretch}
-.child{display:flex;align-items:center;gap:10px;padding:10px;border-radius:10px;border:1px solid #eee;background:#fff;cursor:pointer;width:220px;min-height:84px;transition:background 0.2s}
+.child{flex: 1;display:flex;align-items:center;gap:10px;padding:10px;border-radius:10px;border:1px solid #eee;background:#fff;cursor:pointer;width:220px;min-height:84px;transition:background 0.2s}
 .child:hover{background:#fffbf0}
 .child:active{background:#fff4d6}
 .child img{width:64px;height:64px;border-radius:50%;object-fit:cover;flex-shrink:0}
 .child .meta{display:flex;flex-direction:column;align-items:flex-start}
-.child.add-child{background:linear-gradient(90deg,rgba(107,33,168,0.8),rgba(171,122,231,0.7));color:#fff;border:0;padding:12px 16px;width:220px;min-height:84px;justify-content:center}
+.child.add-child{flex: 1;background:linear-gradient(90deg,rgba(107,33,168,0.8),rgba(171,122,231,0.7));color:#fff;border:0;padding:12px 16px;width:220px;min-height:84px;justify-content:center}
+.child, .child.add-child {
+    width: 220px;
+    height: 84px;
+    padding: 10px;
+}
 
 .action-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
 /* Veiksmų grid: pagrindiniai mygtukai; pirminis veiksmas paryškintas */
@@ -158,7 +200,7 @@ textarea::placeholder{color:var(--muted)}
   .app{margin:12px auto}
   .screens{padding:16px}
   .child-list{flex-wrap:wrap}
-  .child{width:calc(50% - 6px)}
+  .child, .child.add-child{width:calc(50% - 6px)}
   .action-grid{grid-template-columns:1fr 1fr}
   .map-viewport{height:300px}
   .notifications{right:16px;bottom:16px;width:360px}
@@ -166,11 +208,11 @@ textarea::placeholder{color:var(--muted)}
 
 /* telefas iki 600px */
 @media (max-width:600px){
-  .app{margin:0;border-radius:0}
+  .app{margin:0;border-radius:0;max-width:100%;width:100%;padding:0 10px;}
   .action-grid{grid-template-columns:1fr}
   .screens{padding:12px}
   .child-list{flex-direction:column}
-  .child{width:100%}
+  .child, .child.add-child{width:100%}
   .trip-actions{grid-template-columns:1fr}
   .sos-btn{grid-column:1}
   .notifications{right:0;left:0;bottom:0;width:100%;max-width:100%;border-radius:12px 12px 0 0}
