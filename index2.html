@@ -179,8 +179,8 @@
       const open = id => { document.querySelectorAll('.screen').forEach(s => s.classList.add('hidden')); document.getElementById(id).classList.remove('hidden'); };
 
       const orders = [
-        { id: 'O-1001', child: 'Vėjas', childId: 'vejas', avatar:'img/vejas.png', age: 7, pickup: 'Namai', dropoff: 'Mokykla', time: '08:00', pin: '1234', eta: '6 min' },
-        { id: 'O-1002', child: 'Ula',  childId: 'ula',  avatar:'https://cdn-icons-png.flaticon.com/512/706/706830.png', age: 9, pickup: 'P. Pletnevo g. 15', dropoff: 'Darželis', time: '09:15', pin: '5678', eta: '12 min' }
+        { id: 'O-1001', child: 'Vėjas', childId: 'vejas', avatar:'img/vejas.png', age: 7, pickup: 'Kalvarijų g. 125, Vilnius', dropoff: 'Vilniaus licėjus, Šilo g. 13, Vilnius', time: '08:00', pin: '1234', eta: '6 min' },
+        { id: 'O-1002', child: 'Ula',  childId: 'ula',  avatar:'https://cdn-icons-png.flaticon.com/512/706/706830.png', age: 9, pickup: 'P. Pletnevo g. 15, Vilnius', dropoff: 'Darželis „Saulutė“, M. K. Paco g. 3, Vilnius', time: '09:15', pin: '5678', eta: '12 min' }
       ];
       // expose to the QR/PIN module
       window.orders = orders;
@@ -338,6 +338,12 @@
           b.disabled = idx > currentIndex;
         });
         showBottomStagePanel(currentIndex >= stages.indexOf('arrivedPickup'));
+        const bottomActions = bottomStagePanel?.querySelector('.bottom-actions');
+        const actionsVisible = stage !== 'completed';
+        if (bottomActions) {
+          bottomActions.classList.toggle('hidden', !actionsVisible);
+          bottomActions.querySelectorAll('button').forEach(btn => btn.disabled = !actionsVisible);
+        }
         switch(stage){
           case 'accepted': open('drivePickup'); break;
           case 'arrivedPickup': open('confirmPickup'); break;

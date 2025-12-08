@@ -349,6 +349,7 @@ body.bottom-panel-visible .trip-steps{
 /* bottom action buttons layout: side-by-side on wide screens, stacked on small */
 .bottom-stage-panel .bottom-actions{display:flex;gap:8px;margin-top:6px;width:100%}
 .bottom-stage-panel .bottom-actions button{flex:1}
+.bottom-stage-panel .bottom-actions.hidden{display:none !important}
 
 /* define subdued look for traffic/sos on bottom */
 .bottom-stage-panel .traffic-btn,

@@ -215,6 +215,10 @@
             <span class="btn-icon">💬</span>
             Žinutė
           </button>
+          <button class="cancel-trip action-btn" id="cancelTripBtn">
+            <span class="btn-icon">✖</span>
+            Kelionės atšaukimas
+          </button>
           <button class="danger sos-btn">
             <span class="btn-icon">🚨</span>
             SOS
@@ -309,6 +313,25 @@
     $('#todayBtn').addEventListener('click', () => { dateInput.value = today; });
     $('#tomorrowBtn').addEventListener('click', () => { dateInput.value = tomorrow; });
     $('#customDateBtn').addEventListener('click', () => { dateInput.focus(); });
+
+    // Kelionės atšaukimas
+    const cancelTripBtn = $('#cancelTripBtn');
+    const activeStatus = $('#activeTrip .status-text');
+    const etaTime = $('#activeTrip .eta-time');
+    const actionButtons = document.querySelectorAll('#activeTrip .action-btn, #activeTrip .sos-btn');
+    cancelTripBtn.addEventListener('click', () => {
+      const confirmed = confirm('Atšaukti šią kelionę?\n\nVairuotojas bus informuotas, o kelionė nebevyks.');
+      if (!confirmed) return;
+
+      activeStatus.textContent = 'Kelionė atšaukta';
+      etaTime.textContent = '—';
+      actionButtons.forEach(btn => {
+        btn.disabled = true;
+        btn.classList.add('is-disabled');
+      });
+      alert('Kelionė atšaukta. Jei reikia, galite sukurti naują užsakymą.');
+      open('homeScreen');
+    });
   </script>
 </body>
 </html>
